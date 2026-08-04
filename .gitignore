@@ -1,0 +1,80 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  DENY-BY-DEFAULT
+#
+#  This repository is PUBLIC and lives alongside live Orange O Tec financial
+#  data (general ledger, balance sheet, bank vouchers, stock, fund flow).
+#  Nothing is committed unless it is explicitly re-allowed below.
+#
+#  If you add a new data file it stays private automatically.
+#  If you add a new script, it is picked up by the extension rules below.
+#  DO NOT replace this with a normal "list the things to ignore" .gitignore.
+# ══════════════════════════════════════════════════════════════════════════
+
+# 1. Ignore everything.
+*
+
+# 2. Descend into directories so the allowlist below can be reached.
+!*/
+
+# ── 3. Allowlist: source code and documentation ───────────────────────────
+!.gitignore
+!README.md
+!CLAUDE.md
+!*.md
+!*.py
+!*.js
+!*.mjs
+!*.cjs
+!*.ts
+!*.html
+!*.ps1
+!LICENSE.txt
+
+# Project manifests and committed config
+!package.json
+!package-lock.json
+!.claude/settings.json
+
+# ── 4. Hard denies — these win over everything above ──────────────────────
+
+# Dependencies and build artefacts
+node_modules/
+**/__pycache__/
+*.pyc
+*.map
+.tmp_baseline/
+
+# Machine-local config (contains absolute paths / per-machine permissions)
+.claude/settings.local.json
+.env
+*.code-workspace
+
+# Personal material, unrelated to this project
+NISM/
+CV/
+Perosnal/
+RITESH Perosnal/
+
+# ── 5. Financial data — NEVER commit to a public repo ─────────────────────
+# (already covered by the blanket `*`, repeated here as an explicit guard)
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+*.pdf
+*.docx
+*.parquet
+*.pkl
+*.xml
+
+# Generated caches and snapshots
+gp_voucher_cache.json
+gp_segment_cache.json
+*.grouping_snapshot.json
+
+# Output / working directories
+outputs/
+Files/*.xlsx
+Inventory/
+FUND FLOW/*.xlsx
+Old Version*/

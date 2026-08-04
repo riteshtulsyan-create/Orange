@@ -1,0 +1,510 @@
+<title>Company Review — Board Report — Q1 FY26-27</title>
+<style>
+  :root {
+    --bg: #F2F3F6;
+    --surface: #FFFFFF;
+    --surface-2: #E9EBF0;
+    --ink: #12151C;
+    --muted: #5B6472;
+    --line: #DDE0E7;
+    --accent: #2B3F73;
+    --accent-soft: #E4E9F5;
+    --warm: #B5691E;
+    --warm-soft: #F6E9DC;
+    --good: #1E7A46;
+    --good-soft: #E1F2E8;
+    --bad: #B23B3B;
+    --bad-soft: #FBEAEA;
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10131A;
+      --surface: #171B24;
+      --surface-2: #1E232F;
+      --ink: #E8EAEE;
+      --muted: #8C93A3;
+      --line: #2A3040;
+      --accent: #8DA0DA;
+      --accent-soft: #232B42;
+      --warm: #E0994F;
+      --warm-soft: #362615;
+      --good: #56C08A;
+      --good-soft: #163527;
+      --bad: #E88178;
+      --bad-soft: #3A1E1D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10131A; --surface: #171B24; --surface-2: #1E232F; --ink: #E8EAEE; --muted: #8C93A3;
+    --line: #2A3040; --accent: #8DA0DA; --accent-soft: #232B42; --warm: #E0994F; --warm-soft: #362615;
+    --good: #56C08A; --good-soft: #163527; --bad: #E88178; --bad-soft: #3A1E1D;
+  }
+  :root[data-theme="light"] {
+    --bg: #F2F3F6; --surface: #FFFFFF; --surface-2: #E9EBF0; --ink: #12151C; --muted: #5B6472;
+    --line: #DDE0E7; --accent: #2B3F73; --accent-soft: #E4E9F5; --warm: #B5691E; --warm-soft: #F6E9DC;
+    --good: #1E7A46; --good-soft: #E1F2E8; --bad: #B23B3B; --bad-soft: #FBEAEA;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+  }
+  a { color: var(--accent); }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+    padding: 14px 28px;
+  }
+  .topbar-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .brand .sub { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 10px; }
+  .nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav a {
+    text-decoration: none; color: var(--muted); font-size: 12.5px; font-weight: 600;
+    padding: 6px 10px; border-radius: 999px; letter-spacing: 0.01em;
+  }
+  .nav a:hover { background: var(--surface-2); color: var(--ink); }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 28px 28px 80px; }
+
+  .hero { padding: 20px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+  .hero h1 { font-size: 28px; margin: 0 0 6px; text-wrap: balance; letter-spacing: -0.01em; }
+  .hero p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 68ch; }
+
+  section { margin-bottom: 44px; scroll-margin-top: 70px; }
+  .section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .section-head .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 5px;
+  }
+  .section-head h2 { font-size: 18px; margin: 0; }
+  .section-note { color: var(--muted); font-size: 12.5px; margin: -6px 0 16px; max-width: 78ch; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+  .kpi .label { font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .kpi .value { font-size: 28px; font-weight: 700; margin: 6px 0 8px; }
+  .kpi .chips { display: flex; flex-direction: column; gap: 4px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px; width: fit-content;
+  }
+  .chip.good { background: var(--good-soft); color: var(--good); }
+  .chip.bad { background: var(--bad-soft); color: var(--bad); }
+  .chip.neutral { background: var(--surface-2); color: var(--muted); }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+  .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: start; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  td.num, th.num { text-align: right; }
+  tr:last-child td { border-bottom: none; }
+  .table-wrap { overflow-x: auto; }
+  .row-total td { font-weight: 700; border-top: 1px solid var(--ink); }
+
+  .pos { color: var(--good); font-weight: 600; }
+  .neg { color: var(--bad); font-weight: 600; }
+
+  .bars { display: flex; align-items: flex-end; gap: 10px; height: 110px; margin-top: 10px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+  .bar {
+    width: 100%; border-radius: 4px 4px 0 0;
+    background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 65%, transparent));
+  }
+  .bar.neg-bar { background: linear-gradient(0deg, var(--bad), color-mix(in srgb, var(--bad) 65%, transparent)); }
+  .bar-label { font-size: 11px; color: var(--muted); }
+  .bar-value { font-size: 11.5px; font-weight: 700; }
+
+  .sevbar { height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin-top: 4px; }
+  .sevbar > div { height: 100%; }
+  .sev-high { background: var(--bad); }
+  .sev-mid { background: var(--warm); }
+  .sev-low { background: var(--good); }
+
+  .ap-list { display: flex; flex-direction: column; gap: 10px; }
+  .ap-item {
+    display: grid; grid-template-columns: 90px 1fr; gap: 14px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 16px; border-left: 4px solid var(--line);
+  }
+  .ap-item.p-high { border-left-color: var(--bad); }
+  .ap-item.p-medium { border-left-color: var(--warm); }
+  .ap-item.p-low { border-left-color: var(--good); }
+  .ap-pill {
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 3px 8px; border-radius: 999px; height: fit-content; text-align: center;
+  }
+  .p-high .ap-pill { background: var(--bad-soft); color: var(--bad); }
+  .p-medium .ap-pill { background: var(--warm-soft); color: var(--warm); }
+  .p-low .ap-pill { background: var(--good-soft); color: var(--good); }
+  .ap-area { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+  .ap-found { font-size: 13px; color: var(--ink); margin-bottom: 6px; }
+  .ap-action { font-size: 13px; color: var(--muted); }
+  .ap-action b { color: var(--ink); font-weight: 600; }
+
+  .foot { margin-top: 50px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 860px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .nav { display: none; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Orange O Tec Group <span class="sub">Company Review · Q1 FY26-27 (Apr–Jun 2026)</span></div>
+    <nav class="nav">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#gp">Gross Profit</a>
+      <a href="#machines">Machine Sales</a>
+      <a href="#expenses">Expenses</a>
+      <a href="#workingcap">Working Capital</a>
+      <a href="#actions">Action Plan</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="hero">
+    <h1>Q1 FY26-27 Company Review</h1>
+    <p>Turnover Rs. 62.3 Cr, Gross Profit Rs. 13.3 Cr, PBT Rs. 5.7 Cr for the quarter. This report reads alongside the
+    Excel workbook <em>Company_Review_Board_Pack_Q1_FY26-27.xlsx</em>, which holds the full working, formulas, and
+    source-by-source detail behind every figure here.</p>
+  </div>
+
+  <section id="snapshot">
+    <div class="section-head"><span class="eyebrow">01</span><h2>Company Snapshot</h2></div>
+    <div class="section-note">FY25-26 comparisons use Orange O Tec + Enterprises only (Colorix, ~Rs 1.5 Cr PBT/qtr, isn't consolidated in that source) — treat the "vs normal quarter" chips as directional.</div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="label">Turnover</div>
+        <div class="value">Rs. 62.33 Cr</div>
+        <div class="chips">
+          <span class="chip bad">▼ 4.1% vs Q1 FY25-26</span>
+          <span class="chip good">▲ 3.2% vs normal quarter</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="label">Gross Profit</div>
+        <div class="value">Rs. 13.29 Cr</div>
+        <div class="chips">
+          <span class="chip good">▲ 4.2% vs Q1 FY25-26</span>
+          <span class="chip good">▲ 3.4% vs normal quarter</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="label">EBITDA</div>
+        <div class="value">Rs. 6.41 Cr</div>
+        <div class="chips">
+          <span class="chip neutral">n/a for Q1 FY25-26</span>
+          <span class="chip good">▲ 35.1% vs normal quarter</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="label">PBT</div>
+        <div class="value">Rs. 5.73 Cr</div>
+        <div class="chips">
+          <span class="chip neutral">n/a for Q1 FY25-26</span>
+          <span class="chip good">▲ 31.4% vs normal quarter</span>
+        </div>
+      </div>
+    </div>
+    <div style="color:var(--muted); font-size:11.5px; margin-top:8px;">Updated 17-Jul after Tally reconnected — Gross Profit, EBITDA, and PBT rose Rs. 0.068 Cr from a correction to an Enterprises Surat adjustment; the Balance Sheet is now fully reconciled (see Balance Sheet trend below).</div>
+
+    <div style="height:20px"></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:2px;">Month-on-month (Apr–Jun 26)</div>
+        <div style="color:var(--muted); font-size:12px; margin-bottom:4px;">Rs. Crore, EBITDA and PBT</div>
+        <div class="bars">
+          <div class="bar-col">
+            <div class="bar-value">-1.4</div>
+            <div class="bar neg-bar" style="height:14%"></div>
+            <div class="bar-label">Apr</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">4.5</div>
+            <div class="bar" style="height:100%"></div>
+            <div class="bar-label">May</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">3.3</div>
+            <div class="bar" style="height:73%"></div>
+            <div class="bar-label">Jun</div>
+          </div>
+        </div>
+        <div style="color:var(--muted); font-size:12px; margin-top:10px;">April ran an EBITDA loss; May was the strongest month of the quarter by a wide margin, June moderated. Worth understanding what shifted in May before reading it as the new normal.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:10px;">PBT by Entity</div>
+        <table>
+          <tr><th>Entity</th><th class="num">PBT</th></tr>
+          <tr><td>Orange O Tec (Surat + Noida)</td><td class="num neg">-Rs. 1.79 Cr</td></tr>
+          <tr><td>Orange O Tec Enterprises</td><td class="num pos">Rs. 6.00 Cr</td></tr>
+          <tr><td>Colorix Digital Printing</td><td class="num pos">Rs. 1.52 Cr</td></tr>
+          <tr class="row-total"><td>Grand Total</td><td class="num pos">Rs. 5.73 Cr</td></tr>
+        </table>
+        <div style="color:var(--muted); font-size:12px; margin-top:10px;">Orange O Tec's combined loss nets a Rs 6.4 Cr Surat loss against a Rs 4.6 Cr Noida profit — see the Action Plan.</div>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="card">
+      <div style="font-weight:700; font-size:14px; margin-bottom:10px;">Key Ratios</div>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Ratio</th><th class="num">Q1 FY26-27</th><th class="num">FY25-26 Full Year</th></tr>
+        <tr><td>Gross Profit %</td><td class="num">21.3%</td><td class="num">21.3%</td></tr>
+        <tr><td>EBITDA %</td><td class="num">10.3%</td><td class="num">7.9%</td></tr>
+        <tr><td>PBT %</td><td class="num">9.2%</td><td class="num">7.2%</td></tr>
+        <tr><td>Current Ratio</td><td class="num">1.55</td><td class="num" style="color:var(--muted)">n/a</td></tr>
+        <tr><td>Debtor Days</td><td class="num pos">95.8</td><td class="num" style="color:var(--muted)">104.7</td></tr>
+        <tr><td>Creditor Days</td><td class="num">90.1</td><td class="num" style="color:var(--muted)">109.0</td></tr>
+      </table>
+      </div>
+      <div style="color:var(--muted); font-size:12px; margin-top:10px;">Both Debtor Days and Creditor Days have improved (fallen) against the FY25-26 average — collections and payment cycles are both faster than a year ago, even though Debtor Days still runs ahead of Creditor Days.</div>
+    </div>
+  </section>
+
+  <section id="gp">
+    <div class="section-head"><span class="eyebrow">02</span><h2>Gross Profit Performance</h2></div>
+    <div class="section-note">Q1 FY25-26 vs Q1 FY26-27, year-on-year — the one comparison in this report that's a true like-for-like quarter.</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Segment</th><th class="num">Sales Q1 25-26</th><th class="num">Sales Q1 26-27</th><th class="num">Chg %</th><th class="num">GP% 25-26</th><th class="num">GP% 26-27</th></tr>
+      <tr><td>Ink</td><td class="num">Rs. 27.93 Cr</td><td class="num">Rs. 28.43 Cr</td><td class="num pos">+1.8%</td><td class="num">32.5%</td><td class="num pos">37.4%</td></tr>
+      <tr><td>Spare Parts</td><td class="num">Rs. 1.92 Cr</td><td class="num">Rs. 1.73 Cr</td><td class="num neg">-10.1%</td><td class="num">38.4%</td><td class="num neg">27.8%</td></tr>
+      <tr><td>Heads</td><td class="num">Rs. 7.04 Cr</td><td class="num">Rs. 5.21 Cr</td><td class="num neg">-26.0%</td><td class="num">15.0%</td><td class="num neg">4.5%</td></tr>
+      <tr class="row-total"><td>Total</td><td class="num">Rs. 36.89 Cr</td><td class="num">Rs. 35.36 Cr</td><td class="num neg">-4.1%</td><td class="num">29.5%</td><td class="num pos">32.0%</td></tr>
+    </table>
+    </div>
+    <div style="color:var(--muted); font-size:12.5px; margin-top:12px; max-width:78ch;">
+      Ink is ~80% of sales and the sole growth engine this quarter, with margin up nearly 5 points — but Pigment Ink specifically
+      has collapsed from 30.4% to 9.2% margin, worth checking directly with product/pricing. Spare Parts and Heads both lost
+      sales and margin, Heads severely so.
+    </div>
+  </section>
+
+  <section id="machines">
+    <div class="section-head"><span class="eyebrow">03</span><h2>Machine Sales</h2></div>
+    <div class="section-note">New this quarter — Machine Sale revenue wasn't captured in the Gross Profit report at all until now.</div>
+    <div class="grid-2">
+      <div class="card">
+        <table>
+          <tr><th>Metric</th><th class="num">Q1 FY25-26</th><th class="num">Q1 FY26-27</th><th class="num">Chg %</th></tr>
+          <tr><td>Revenue</td><td class="num">Rs. 21.53 Cr</td><td class="num">Rs. 18.64 Cr</td><td class="num neg">-13.4%</td></tr>
+          <tr><td>Quantity</td><td class="num">45 units</td><td class="num">42 units</td><td class="num neg">-6.7%</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:2px;">Revenue by month (Rs. Cr)</div>
+        <div class="bars">
+          <div class="bar-col"><div class="bar-value">3.2</div><div class="bar" style="height:25%"></div><div class="bar-label">Apr 26</div></div>
+          <div class="bar-col"><div class="bar-value">13.0</div><div class="bar" style="height:100%"></div><div class="bar-label">May 26</div></div>
+          <div class="bar-col"><div class="bar-value">2.5</div><div class="bar" style="height:19%"></div><div class="bar-label">Jun 26</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="color:var(--muted); font-size:12.5px; margin-top:12px; max-width:78ch;">
+      Down year-on-year but very lumpy month to month — May's spike looks like a single large order rather than a demand
+      shift. Don't extrapolate a trend from either direction; check the order pipeline for next quarter instead.
+    </div>
+  </section>
+
+  <section id="expenses">
+    <div class="section-head"><span class="eyebrow">04</span><h2>Expense Analysis</h2></div>
+    <div class="section-note">Two lenses: year-on-year, and against a "normal quarter" benchmark (FY25-26 full year ÷ 4).</div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:10px;">Year-on-year</div>
+        <table>
+          <tr><th>Category</th><th class="num">Q1 25-26</th><th class="num">Q1 26-27</th><th class="num">Chg %</th></tr>
+          <tr><td>Direct</td><td class="num">Rs. 2.25 Cr</td><td class="num">Rs. 4.12 Cr</td><td class="num neg">+83.0%</td></tr>
+          <tr><td>Indirect</td><td class="num">Rs. 6.87 Cr</td><td class="num">Rs. 7.50 Cr</td><td class="num neg">+9.1%</td></tr>
+          <tr class="row-total"><td>Total</td><td class="num">Rs. 9.12 Cr</td><td class="num">Rs. 11.62 Cr</td><td class="num neg">+27.4%</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:10px;">vs Normal-Quarter Benchmark</div>
+        <table>
+          <tr><th>Category</th><th class="num">Benchmark</th><th class="num">Actual</th><th class="num">vs Benchmark</th></tr>
+          <tr><td>Direct</td><td class="num">Rs. 2.82 Cr</td><td class="num">Rs. 4.12 Cr</td><td class="num neg">+46.0%</td></tr>
+          <tr><td>Indirect</td><td class="num">Rs. 8.30 Cr</td><td class="num">Rs. 7.50 Cr</td><td class="num pos">-9.7%</td></tr>
+          <tr class="row-total"><td>Total</td><td class="num">Rs. 11.12 Cr</td><td class="num">Rs. 11.62 Cr</td><td class="num neg">+4.4%</td></tr>
+        </table>
+      </div>
+    </div>
+    <div style="color:var(--muted); font-size:12.5px; margin-top:12px; max-width:78ch;">
+      Reframing against a full-year run-rate changes the read: Indirect Expenses are actually running <b style="color:var(--good)">below</b>
+      normal (last year's Q1 was a light quarter), while Direct Expenses are elevated on both measures — Custom Duty alone is up 55%.
+      Full category-by-category breakdown with reasons is in the Excel workbook's "Expense Details" sheet.
+    </div>
+  </section>
+
+  <section id="workingcap">
+    <div class="section-head"><span class="eyebrow">05</span><h2>Where Funds Are Blocked — Working Capital</h2></div>
+    <div class="section-note">Two independent views: the Tally CFS tracker (day-level) and the Balance Sheet trend (month-end).</div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:10px;">12-Jun-26 → 8-Jul-26 snapshot</div>
+        <table>
+          <tr><th>Item</th><th class="num">12-Jun</th><th class="num">8-Jul</th><th class="num">Change</th></tr>
+          <tr><td>Inventory</td><td class="num">45.44</td><td class="num">44.97</td><td class="num pos">-0.48</td></tr>
+          <tr><td>Debtors</td><td class="num">63.30</td><td class="num">68.64</td><td class="num neg">+5.34</td></tr>
+          <tr><td>Creditors</td><td class="num">66.38</td><td class="num">62.03</td><td class="num neg">-4.34</td></tr>
+          <tr class="row-total"><td>Net Working Capital</td><td class="num">42.37</td><td class="num">51.58</td><td class="num neg">+9.21</td></tr>
+        </table>
+        <div style="color:var(--muted); font-size:12px; margin-top:10px;">Net Working Capital up Rs 9.2 Cr (+22%) in just 26 days.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:700; font-size:14px; margin-bottom:2px;">Balance Sheet trend, Rs. Cr</div>
+        <div style="color:var(--muted); font-size:12px; margin-bottom:4px;">Net Working Capital (Debtors + Inventory − Creditors), Mar–Jun 26</div>
+        <div class="bars">
+          <div class="bar-col"><div class="bar-value">60.3</div><div class="bar" style="height:75%"></div><div class="bar-label">Mar</div></div>
+          <div class="bar-col"><div class="bar-value">50.4</div><div class="bar" style="height:52%"></div><div class="bar-label">Apr</div></div>
+          <div class="bar-col"><div class="bar-value">55.7</div><div class="bar" style="height:64%"></div><div class="bar-label">May</div></div>
+          <div class="bar-col"><div class="bar-value">64.3</div><div class="bar" style="height:100%"></div><div class="bar-label">Jun</div></div>
+        </div>
+        <div style="color:var(--muted); font-size:12px; margin-top:10px;">Dipped in April as Mar-26 debtors were collected faster than new billing replaced them, then climbed through May and June to Rs 64.3 Cr — above even the Mar-26 starting point. A different, larger number than the Tally CFS snapshot alongside (different measurement basis), but the two agree on direction: working capital is rising through the quarter.</div>
+        <div style="color:var(--muted); font-size:12px; margin-top:8px; padding-top:8px; border-top:1px solid var(--line);">Reconciliation gap (Total Liabilities vs Assets): ~0 (Mar) → Rs 1.72 Cr (Apr) → Rs 1.69 Cr (May) → <strong style="color:var(--good)">Rs 0.00 (Jun, fully closed 17-Jul)</strong> — opened as the quarter's entries were booked, then closed once Tally reconnected and the remaining Enterprises residual was traced to a single since-cleared creditor balance. Independently re-verified via full recalculation: Total Liabilities = Total Assets to the rupee for all five entities.</div>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="card">
+      <div style="font-weight:700; font-size:14px; margin-bottom:10px;">Segment risk — receivables overdue &gt;180 days</div>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Segment</th><th class="num">Net WC</th><th class="num">Aged &gt;180d</th><th class="num">Total Receivables</th><th>% Overdue</th></tr>
+        <tr>
+          <td>Machines</td><td class="num">24.27</td><td class="num">32.25</td><td class="num">34.21</td>
+          <td style="min-width:140px"><span class="chip bad">94%</span><div class="sevbar"><div class="sev-high" style="width:94%"></div></div></td>
+        </tr>
+        <tr>
+          <td>Ink</td><td class="num">20.47</td><td class="num">26.50</td><td class="num">36.81</td>
+          <td><span class="chip bad">72%</span><div class="sevbar"><div class="sev-high" style="width:72%"></div></div></td>
+        </tr>
+        <tr>
+          <td>Head</td><td class="num">13.05</td><td class="num">5.87</td><td class="num">6.99</td>
+          <td><span class="chip bad">84%</span><div class="sevbar"><div class="sev-high" style="width:84%"></div></div></td>
+        </tr>
+        <tr>
+          <td>Spare Parts</td><td class="num">9.77</td><td class="num">1.69</td><td class="num">2.40</td>
+          <td><span class="chip bad">70%</span><div class="sevbar"><div class="sev-high" style="width:70%"></div></div></td>
+        </tr>
+        <tr>
+          <td>Others</td><td class="num">-15.98</td><td class="num">0.73</td><td class="num">3.12</td>
+          <td><span class="chip good">23%</span><div class="sevbar"><div class="sev-low" style="width:23%"></div></div></td>
+        </tr>
+      </table>
+      </div>
+      <div style="color:var(--muted); font-size:12px; margin-top:10px;">Machines is the single biggest blocked-cash item in the business — 94% of what it's owed is overdue beyond 180 days.</div>
+    </div>
+  </section>
+
+  <section id="actions">
+    <div class="section-head"><span class="eyebrow">06</span><h2>Consolidated Action Plan</h2></div>
+    <div class="section-note">Priority, what was found, and the recommended action. Full basis/justification for each is in the Excel workbook's "Action Plan" sheet.</div>
+
+    <div class="ap-list">
+      <div class="ap-item p-high">
+        <div class="ap-pill">High</div>
+        <div>
+          <div class="ap-area">Orange O Tec (Surat + Noida)</div>
+          <div class="ap-found">Combined entity made a Rs. 1.8 Cr net loss this quarter — a Rs. 6.4 Cr Surat loss only partly offset by a Rs. 4.6 Cr Noida profit.</div>
+          <div class="ap-action"><b>Action:</b> Standalone review of Surat's pricing, cost allocation, and branch/related-party transactions within 2 weeks.</div>
+        </div>
+      </div>
+      <div class="ap-item p-high">
+        <div class="ap-pill">High</div>
+        <div>
+          <div class="ap-area">Machines — Receivables</div>
+          <div class="ap-found">94% of what Machines customers owe (Rs. 32.3 Cr of Rs. 34.2 Cr) is overdue beyond 180 days — the worst collection quality of any segment.</div>
+          <div class="ap-action"><b>Action:</b> Freeze dispatch to customers overdue &gt;180 days; recover at least 25% of the aged balance (~Rs. 8 Cr) by quarter-end.</div>
+        </div>
+      </div>
+      <div class="ap-item p-high">
+        <div class="ap-pill">High</div>
+        <div>
+          <div class="ap-area">Heads segment</div>
+          <div class="ap-found">Gross profit % collapsed from 15.0% to 4.5% year-on-year, on a sales base that also fell 26%.</div>
+          <div class="ap-action"><b>Action:</b> Review pricing/discount limits this month; confirm whether the vanished "OTHER" head category (Rs. 5.2 Cr of GP last year) was lost or reclassified.</div>
+        </div>
+      </div>
+      <div class="ap-item p-medium">
+        <div class="ap-pill">Medium</div>
+        <div>
+          <div class="ap-area">Direct Expenses</div>
+          <div class="ap-found">Up 83% year-on-year and 46% above the normal quarterly run-rate — elevated on both measures. Custom Duty alone is up 55%.</div>
+          <div class="ap-action"><b>Action:</b> Line-by-line finance review of Direct Expenses and Custom Duty before the quarter closes.</div>
+        </div>
+      </div>
+      <div class="ap-item p-medium">
+        <div class="ap-pill">Medium</div>
+        <div>
+          <div class="ap-area">Pigment Ink</div>
+          <div class="ap-found">Gross margin fell from 30.4% to 9.2% year-on-year — the steepest drop of any ink line.</div>
+          <div class="ap-action"><b>Action:</b> Review input cost and selling price directly with product/pricing — a drop this steep usually means a cost increase hasn't been passed through.</div>
+        </div>
+      </div>
+      <div class="ap-item p-medium">
+        <div class="ap-pill">Medium</div>
+        <div>
+          <div class="ap-area">Ink — Working Capital</div>
+          <div class="ap-found">Net working capital rose Rs. 5.7 Cr, the largest segment increase, with 72% of receivables also overdue beyond 180 days.</div>
+          <div class="ap-action"><b>Action:</b> Recover 30% of aged receivables (~Rs. 8 Cr) by quarter-end; review inventory ordering against actual demand.</div>
+        </div>
+      </div>
+      <div class="ap-item p-medium">
+        <div class="ap-pill">Medium</div>
+        <div>
+          <div class="ap-area">Debtor Days vs Creditor Days</div>
+          <div class="ap-found">Collections take ~96 days, payments to suppliers ~90 — funding customers at the company's own expense. Both are better than the FY25-26 average, though.</div>
+          <div class="ap-action"><b>Action:</b> Target Debtor Days ≤ 80 over two quarters via tighter credit terms and faster follow-up.</div>
+        </div>
+      </div>
+      <div class="ap-item p-medium">
+        <div class="ap-pill">Medium</div>
+        <div>
+          <div class="ap-area">Machine Sales — softening demand</div>
+          <div class="ap-found">Revenue down 13.4%, quantity down 6.7% year-on-year — a segment with no visibility at all in the standard GP report.</div>
+          <div class="ap-action"><b>Action:</b> Short review with the Machines sales team on next quarter's order pipeline; don't extrapolate from May's one-off spike.</div>
+        </div>
+      </div>
+      <div class="ap-item p-low">
+        <div class="ap-pill">Low</div>
+        <div>
+          <div class="ap-area">Spare Parts — quantity spike</div>
+          <div class="ap-found">Sale quantity jumped from ~483 to ~10,667 units between May and June — looks like a data/unit-of-measure issue rather than genuine demand.</div>
+          <div class="ap-action"><b>Action:</b> Verify against source records before using in any external report or forecast.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    Company Review — Board Report, Q1 FY26-27 (Apr–Jun 2026). Companion to the Excel workbook
+    <em>Company_Review_Board_Pack_Q1_FY26-27.xlsx</em>, which holds full source-by-source detail, formulas, and
+    the methodology/scope notes for every figure above. Prepared 17-Jul-2026.
+  </div>
+</main>
