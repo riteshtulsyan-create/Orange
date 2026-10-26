@@ -890,3 +890,26 @@ lists per period code.
   built into either script.
 - **Cash Flow / Fund Flow statements** — would need the 31-Mar-2026 opening Balance Sheet,
   mentioned as a possible follow-up but not started.
+  **Done 2026-10-24** as the CFO Pack - see "CFO Pack" below.
+
+## CFO Pack (build_cfo_pack.py + verify_cfo_pack.py) - added 2026-10-24
+
+`python scripts\build_cfo_pack.py --source "Files\Orange FS\PL_BS_GL_Detail_<ts>.xlsx"` writes
+`Files\Results\CFO_Pack_PL_BS_CF_FF_<ts>.xlsx` + `.pdf`: the six MOM P&L / BS / Ratio sheets copied
+unchanged, MOM Cash Flow and Fund Flow (CFS and SFS, the same 11 periods x 8 columns as the P&L), an
+Opening BS 31-Mar-26 sheet, a CFO Analysis sheet (one-page summary first) and the `PDF - Statements`
+print sheet. Excel recalculates and exports the PDF. Then run
+`python scripts\verify_cfo_pack.py <pack.xlsx> --source <same PL_BS_GL_Detail> --no-recalc`; it must say ALL CHECKS PASSED.
+
+- **Opening 31-Mar-26** comes from ConnectWave `v_ledger_detail.opening` (ConnectWave reports Dr as +,
+  so the build negates it). Map ledgers via `group_chain`, not `grouping`, because `grouping` is a level too high.
+  Mapped that way it matched the Tally 31-Mar pull to the rupee by group (measured 2026-10-24).
+  Orange O Tec Surat comes from `gl_data\bs_q4_2526_<KEY>.csv`, because the mirror times out on that book.
+  Opening stock is the P&L's April 'Opening Stock'. P&L A/c is the balancing figure. Cash-flow line D
+  for Q1 being nil, for every company, proves the opening ties to the books.
+- **Company split guard.** If an Orange O Tec file is split into a FY 25-26 and a FY 26-27 company (as
+  Enterprises already is), a wrong file returns figures with no error. The pack reads the 26-27 / 25-26
+  names from `Files\TALLY Company_List.xlsx`, requires each to exist EXACTLY in ConnectWave `v_company`,
+  and treats an entity whose two names differ as SPLIT: its opening is the 26-27 file's carried-forward
+  opening, compared group by group with the 25-26 file. A mismatch stops the build.
+  `fetch_gl_data.company_for()` / `PRIOR_YEAR_COMPANIES` must get the same new entry when a split happens.
